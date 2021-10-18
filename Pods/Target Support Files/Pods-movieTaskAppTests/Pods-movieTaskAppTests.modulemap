@@ -1,0 +1,6 @@
+framework module Pods_movieTaskAppTests {
+  umbrella header "Pods-movieTaskAppTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
