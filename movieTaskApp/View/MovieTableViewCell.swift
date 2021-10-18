@@ -21,7 +21,7 @@ class MovieTableViewCell: UITableViewCell {
                    titleTxtView.text = movie?.title
                    releaseDateTxtView.text = movie?.releaseDate
                    overviewTxtView.text = movie?.overview
-                   voteTxtView.text = "\(movie?.voteAverage)"
+                        voteTxtView.text = "\( movie?.voteAverage! ?? 0)"
                    if(movie?.posterImage != nil){
                    posterImgView.sd_setImage(with: URL(string:"\(Urls.BaseImgUrl)\(movie?.posterImage! ?? "")"), placeholderImage: UIImage(named: "img"))
                    }              }

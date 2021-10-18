@@ -15,7 +15,7 @@ class ViewModel {
       
       init(networkService:NetworkServiceProtocol = NetworkService()) {
           self.networkService = NetworkService()
-          
+          getMovies(query: "thor")
       }
       
       var movies:[Movie]?{
@@ -28,7 +28,7 @@ class ViewModel {
               bindErrorToView()
           }
       }
-    private func getMovies(query:String){
+     func getMovies(query:String){
         networkService.getMovies(query:query){
               [weak self](movies,error) in
               
@@ -43,10 +43,7 @@ class ViewModel {
               }
           }
           
-      }
-      func search(searchText:String){
-          getMovies(query: searchText)
-      }
+    }
       
     
 }

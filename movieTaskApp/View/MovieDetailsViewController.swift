@@ -47,8 +47,7 @@ class MovieDetailsViewController: UIViewController {
               
             overviewTxtView.text = movie?.overview
             if movie?.video == true {
-                videoBtn.isHidden = false
-                videoBtn.sd_setImage(with: URL(string:"\(Urls.BaseImgUrl)\(movie?.posterImage! ?? "")"), for: .normal, placeholderImage: UIImage(named: "img"))
+                videoBtn.sd_setImage(with: URL(string:"\(Urls.BaseImgUrl)\(movie?.backdrop! ?? "")"), for: .normal, placeholderImage: UIImage(named: "img"))
                 videoViewsModel = VideoViewModel()
 
             }

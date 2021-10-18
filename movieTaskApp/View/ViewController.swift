@@ -23,16 +23,33 @@ class ViewController: UIViewController {
     @IBOutlet weak var totalAvegTxtView: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var movies=[Movie]()
     var moviesViewModel:MovieViewModelProtocol?
+    var viewModel:ViewModel?
+    var movies=[Movie]()
+       var orginalMovies=[Movie]()
+
+
     let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-    
+    //  moviesViewModel = moviesViewModel()
+
         moviesTableView.delegate = self
         moviesTableView.dataSource = self
+        searchBar.delegate = self
+
+        movies = [Movie]()
+        orginalMovies = [Movie]()
+        viewModel = ViewModel()
+        viewModel?.bindToView = { [weak self] in
+            print("vlmf")
+            guard let movies = self?.viewModel?.movies else{ return }
+            self?.orginalMovies = movies
+            self?.movies = movies
+            self?.moviesTableView.reloadData()
+        }
     
 // /** Api Call using RxSwift
 
@@ -78,10 +95,11 @@ class ViewController: UIViewController {
 }
 extension ViewController : UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
-        moviesViewModel?.getMovies(query: searchText)
-        moviesTableView.reloadData()
+        viewModel?.getMovies(query: searchText)
+        print("search")
+     
     }
+   
 }
 extension ViewController:UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
